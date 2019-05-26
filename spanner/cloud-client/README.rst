@@ -199,3 +199,19 @@ to `browse the source`_ and  `report issues`_.
 
 
 .. _Google Cloud SDK: https://cloud.google.com/sdk/
+
+
+
+--Create a Spanner instance named test-instance:
+
+gcloud spanner instances create test-instance --config=regional-us-central1 --description="Test Instance" --nodes=1
+
+--Create a database and insert data using the Python scripts from our GitHub clone:
+
+python snippets.py test-instance --database-id example-db create_database
+
+python snippets.py test-instance --database-id example-db insert_data
+
+--Run a query to read the values of all columns from the Albums table:
+
+gcloud spanner databases execute-sql example-db --instance=test-instance --sql='SELECT SingerId, AlbumId, AlbumTitle FROM Albums'
